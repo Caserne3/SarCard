@@ -1,5 +1,4 @@
 <?php
-// --- Connexion BDD et Header ---
 include 'includes/db_connect.php';
 include 'includes/header.php';
 
@@ -48,11 +47,11 @@ $mes_cartes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         Rareté : <?php echo htmlspecialchars($carte['rarity']); ?>
                     </p>
 
-                    <!-- TÂCHE 3 : Bouton conditionnel selon is_for_sale -->
+                    <!--Bouton conditionnel selon is_for_sale -->
                     <?php if ($carte['is_for_sale'] == 1): ?>
                         <!-- La carte est déjà en vente -->
                         <span style="display: inline-block; padding: 8px 15px; background: #f39c12; color: white; border-radius: 5px; font-size: 0.9rem;">
-                            📢 En vente sur le marché
+                            En vente sur le marché
                         </span>
                     <?php else: ?>
                         <!-- La carte n'est pas en vente → lien vers sell.php -->
