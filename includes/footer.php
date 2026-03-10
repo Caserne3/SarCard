@@ -1,7 +1,7 @@
 </main>
 
 <footer>
-    <p>&copy; <?php echo date("Y"); ?> SarKard. Tous droits réservés.</p>
+    <p>&copy; <?php echo date("Y"); ?> SarKard. Collectionnez tout, payez plus.</p>
 </footer>
 
 </body>
