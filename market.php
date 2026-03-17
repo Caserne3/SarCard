@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buy_card_id'])) {
     } else {
         $card_inventory_id = intval($_POST['buy_card_id']);
 
-        // Récupérer les infos de la carte en vente
         $stmt = $pdo->prepare("SELECT user_cards.id, user_cards.user_id AS seller_id, user_cards.sale_price, user_cards.card_id
                                 FROM user_cards
                                 WHERE user_cards.id = :id AND user_cards.is_for_sale = 1");
@@ -34,15 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buy_card_id'])) {
             if ($acheteur['credits'] < $carte_en_vente['sale_price']) {
                 $error = "Vous n'avez pas assez de crédits.";
             } else {
-                // 1) Retirer les crédits à l'acheteur
+                //  Retirer les crédits à l'acheteur
                 $stmt = $pdo->prepare("UPDATE users SET credits = credits - :prix WHERE id = :id");
                 $stmt->execute(['prix' => $carte_en_vente['sale_price'], 'id' => $_SESSION['user_id']]);
 
-                // 2) Ajouter les crédits au vendeur
+                // Ajouter les crédits au vendeur
                 $stmt = $pdo->prepare("UPDATE users SET credits = credits + :prix WHERE id = :id");
                 $stmt->execute(['prix' => $carte_en_vente['sale_price'], 'id' => $carte_en_vente['seller_id']]);
 
-                // 3) Transférer la carte à l'acheteur et retirer de la vente
+                //  Transférer la carte à l'acheteur et retirer de la vente
                 $stmt = $pdo->prepare("UPDATE user_cards SET user_id = :buyer_id, is_for_sale = 0, sale_price = NULL WHERE id = :id");
                 $stmt->execute(['buyer_id' => $_SESSION['user_id'], 'id' => $card_inventory_id]);
 
@@ -68,7 +67,6 @@ $cards_for_sale = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h1>Marché des cartes</h1>
     <p>Découvrez les cartes mises en vente par la communauté.</p>
 
-    <!-- Messages de succès / erreur -->
     <?php if (isset($_GET['success'])): ?>
         <p style="color: green; margin-top: 10px; font-weight: bold;">Votre carte a été mise en vente avec succès !</p>
     <?php endif; ?>

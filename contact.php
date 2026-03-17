@@ -4,23 +4,22 @@ include 'includes/header.php';
 $success_message = '';
 $error_message = '';
 
-// --- Traitement du formulaire de contact ---
+// Formulaire contact
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom    = $_POST['nom'];
     $email  = $_POST['email'];
     $sujet  = $_POST['sujet'];
     $message = $_POST['message'];
 
-    // Vérifier que tous les champs sont remplis
+    // Verif champs remplis
     if (empty($nom) || empty($email) || empty($sujet) || empty($message)) {
         $error_message = "Veuillez remplir tous les champs.";
 
-        // Vérifier le format de l'email
+        // Verif format de l'email
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error_message = "Le format de l'email est invalide.";
     } else {
-        // Tout est bon (on simule l'envoi, pas de fonction mail() en local)
-        $success_message = "Merci pour votre message, notre équipe vous répondra sous 24h.";
+        $success_message = "Merci pour votre message, notre équipe vous répondra sous 24h promis.";
     }
 }
 ?>
@@ -30,14 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Contactez-nous</h1>
     <p style="margin-bottom: 20px; color: #666;">Une question ? Un problème ? Écrivez-nous !</p>
 
-    <!-- Message de succès -->
+    <!---succès --->
     <?php if ($success_message): ?>
         <p style="color: green; background: #e8f5e9; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
             <?php echo $success_message; ?>
         </p>
     <?php endif; ?>
 
-    <!-- Message d'erreur -->
+    <!-- erreur -->
     <?php if ($error_message): ?>
         <p style="color: red; background: #ffebee; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
             <?php echo $error_message; ?>

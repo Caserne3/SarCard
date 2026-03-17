@@ -12,7 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 $message = '';
 $message_color = '';
 
-// --- Traitement : le joueur réclame ses 50 crédits gratuits ---
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['claim_reward'])) {
 
     // Récupérer les infos du joueur (crédits + date de dernière récompense)
@@ -24,10 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['claim_reward'])) {
     $peut_reclamer = false;
 
     if ($user['last_reward_date'] === null) {
-        // Première fois : jamais réclamé → OK
         $peut_reclamer = true;
     } else {
-        // Calculer la différence en secondes entre maintenant et la dernière récompense
+
         $derniere_recompense = strtotime($user['last_reward_date']);
         $maintenant = strtotime(date('Y-m-d H:i:s'));
         $difference_secondes = $maintenant - $derniere_recompense;

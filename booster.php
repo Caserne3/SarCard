@@ -14,7 +14,6 @@ $carte_gagnee = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['open_booster'])) {
 
-    // Requête 1 : Récupérer les crédits actuels du joueur
     $stmt = $pdo->prepare("SELECT credits FROM users WHERE id = :id");
     $stmt->execute(['id' => $_SESSION['user_id']]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);

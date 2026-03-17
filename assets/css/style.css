@@ -1,124 +1,578 @@
+/* ============================================================
+   SARKARD — RETROWAVE / SYNTHWAVE THEME
+   Inspiré par les années 80, Miami Nights, Neon & Synthwave
+   ============================================================ */
+
+/* ======================== VARIABLES ======================== */
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #e74c3c;
-    --accent-color: #3498db;
-    --text-color: #333;
-    --bg-color: #f4f4f4;
-    --white: #ffffff;
-    --header-height: 60px;
+    /* Fonds sombres */
+    --bg-dark: #0b0b1a;
+    --bg-card: #14142b;
+    --bg-input: rgba(255, 255, 255, 0.05);
+
+    /* Couleurs néon */
+    --neon-pink: #ff2d95;
+    --neon-cyan: #00f0ff;
+    --neon-purple: #b026ff;
+    --neon-yellow: #ffe156;
+
+    /* Dégradé principal */
+    --gradient-neon: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+    --gradient-header: linear-gradient(90deg, #0b0b1a 0%, #1a0a2e 50%, #0b0b1a 100%);
+
+    /* Texte */
+    --text-primary: #f0e6ff;
+    --text-secondary: #9d8abf;
+    --text-muted: #6a5a8a;
+
+    /* Polices */
+    --font-title: 'Orbitron', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+
+    /* Header */
+    --header-height: 70px;
+
+    /* Ombres néon */
+    --shadow-pink: 0 0 15px rgba(255, 45, 149, 0.3), 0 0 30px rgba(255, 45, 149, 0.1);
+    --shadow-cyan: 0 0 15px rgba(0, 240, 255, 0.3), 0 0 30px rgba(0, 240, 255, 0.1);
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
 }
 
-* {
+/* ======================== RESET ======================== */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* ======================== BASE ======================== */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-body);
+    font-weight: 400;
     line-height: 1.6;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    /* Grille rétro en fond */
+    background-image:
+        linear-gradient(rgba(176, 38, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(176, 38, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
 }
 
 a {
     text-decoration: none;
     color: inherit;
+    transition: color var(--transition-base);
 }
 
 ul {
     list-style: none;
 }
 
-/* Header & Navigation */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-title);
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.3;
+}
+
+h1 {
+    font-size: 2rem;
+    background: var(--gradient-neon);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: var(--neon-cyan);
+}
+
+h3 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid rgba(176, 38, 255, 0.2);
+    margin: 20px 0;
+}
+
+/* ======================== HEADER & NAVIGATION ======================== */
 header {
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: 0 20px;
+    background: var(--gradient-header);
+    border-bottom: 1px solid rgba(176, 38, 255, 0.3);
+    padding: 0 30px;
     height: var(--header-height);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 2px 20px rgba(176, 38, 255, 0.15);
 }
 
+/* Logo */
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--white);
+    font-family: var(--font-title);
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo a {
+    color: var(--text-primary);
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
 }
 
 .logo span {
-    color: var(--secondary-color);
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px rgba(255, 45, 149, 0.5), 0 0 20px rgba(255, 45, 149, 0.3);
 }
 
+/* Navigation */
 nav ul {
     display: flex;
-    gap: 20px;
+    gap: 25px;
+    align-items: center;
 }
 
 nav a {
-    color: var(--white);
+    color: var(--text-secondary);
     font-weight: 500;
-    transition: color 0.3s;
+    font-size: 0.95rem;
+    padding: 8px 0;
+    position: relative;
+    transition: color var(--transition-base), text-shadow var(--transition-base);
 }
 
 nav a:hover {
-    color: var(--accent-color);
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3);
 }
 
-/* Footer */
-footer {
-    background-color: var(--primary-color);
-    color: var(--white);
-    text-align: center;
-    padding: 20px;
-    margin-top: auto;
+/* Ligne lumineuse sous le lien au survol */
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--neon-cyan);
+    box-shadow: 0 0 8px var(--neon-cyan);
+    transition: width var(--transition-base);
 }
 
-/* Main Content */
+nav a:hover::after {
+    width: 100%;
+}
+
+/* ======================== MAIN CONTENT ======================== */
 main {
     flex: 1;
-    padding: 20px;
+    padding: 30px 20px;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
 }
 
-/* Buttons */
+/* ======================== FOOTER ======================== */
+footer {
+    background: var(--gradient-header);
+    border-top: 1px solid rgba(176, 38, 255, 0.3);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 25px 20px;
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+footer p {
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+footer ul {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+footer a {
+    color: var(--text-secondary);
+    transition: color var(--transition-base), text-shadow var(--transition-base);
+}
+
+footer a:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 8px rgba(255, 45, 149, 0.5);
+}
+
+/* ======================== BOUTONS ======================== */
 .btn {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--secondary-color);
-    color: var(--white);
+    padding: 12px 28px;
+    background: var(--gradient-neon);
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-align: center;
+    transition: transform var(--transition-fast), box-shadow var(--transition-base), filter var(--transition-base);
+    box-shadow: 0 4px 15px rgba(255, 45, 149, 0.3);
 }
 
 .btn:hover {
-    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-pink);
+    filter: brightness(1.15);
 }
 
-/* Responsive */
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Bouton désactivé (récompense indisponible) */
+.btn:disabled,
+.btn[disabled] {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-muted) !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    filter: none !important;
+    transform: none !important;
+}
+
+/* ======================== HERO SECTION (Accueil) ======================== */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    position: relative;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ======================== GRILLE DE CARTES (Marché & Collection) ======================== */
+.market-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+/* ======================== CARTE INDIVIDUELLE ======================== */
+.card-item {
+    background: var(--bg-card);
+    border: 1px solid rgba(176, 38, 255, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+    box-shadow: var(--shadow-card);
+}
+
+.card-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(255, 45, 149, 0.2), 0 0 15px rgba(0, 240, 255, 0.1);
+    border-color: rgba(255, 45, 149, 0.4);
+}
+
+.card-item img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-bottom: 1px solid rgba(176, 38, 255, 0.15);
+    transition: filter var(--transition-base);
+}
+
+.card-item:hover img {
+    filter: brightness(1.1) saturate(1.2);
+}
+
+.card-item .card-info {
+    padding: 18px;
+}
+
+.card-item .card-info h3 {
+    margin-bottom: 6px;
+}
+
+.card-item .card-info p {
+    font-size: 0.9rem;
+}
+
+/* ======================== SECTIONS (Auth, Profil, Booster, Contact, etc.) ======================== */
+section {
+    border-radius: 12px;
+}
+
+/* Boîtes blanches → boîtes dark avec bordure néon subtile */
+.auth-section,
+.booster-section {
+    background: var(--bg-card) !important;
+    border: 1px solid rgba(176, 38, 255, 0.2) !important;
+    box-shadow: var(--shadow-card) !important;
+}
+
+/* ======================== FORMULAIRES ======================== */
+label {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 6px;
+    background: var(--bg-input);
+    border: 1px solid rgba(176, 38, 255, 0.2);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.15);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ======================== MESSAGES SUCCÈS / ERREUR ======================== */
+/* Succès */
+p[style*="color: green"],
+p[style*="color:green"] {
+    background: rgba(0, 240, 255, 0.08) !important;
+    color: var(--neon-cyan) !important;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    padding: 12px 15px !important;
+    border-radius: 8px !important;
+    font-weight: 500;
+}
+
+/* Erreur */
+p[style*="color: red"],
+p[style*="color:red"] {
+    background: rgba(255, 45, 149, 0.08) !important;
+    color: var(--neon-pink) !important;
+    border: 1px solid rgba(255, 45, 149, 0.2);
+    padding: 12px 15px !important;
+    border-radius: 8px !important;
+    font-weight: 500;
+}
+
+/* ======================== INLINE STYLE OVERRIDES ======================== */
+/* Les pages utilisent des styles inline (background: white, etc.)
+   On les force en thème sombre grâce à ces sélecteurs. */
+
+section[style*="background: white"],
+section[style*="background:white"] {
+    background: var(--bg-card) !important;
+    border: 1px solid rgba(176, 38, 255, 0.2) !important;
+    box-shadow: var(--shadow-card) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Bouton "En vente sur le marché" — badge doré néon */
+span[style*="background: #f39c12"] {
+    background: rgba(255, 225, 86, 0.1) !important;
+    color: var(--neon-yellow) !important;
+    border: 1px solid rgba(255, 225, 86, 0.3) !important;
+}
+
+/* Prix en crédits */
+p[style*="color: var(--secondary-color)"],
+strong[style*="color: var(--secondary-color)"] {
+    color: var(--neon-pink) !important;
+}
+
+/* Texte "Votre carte" */
+span[style*="color: #999"] {
+    color: var(--text-muted) !important;
+}
+
+/* Couleur des liens internes (anciennement --secondary-color) */
+a[style*="color: var(--secondary-color)"] {
+    color: var(--neon-cyan) !important;
+    transition: text-shadow var(--transition-base);
+}
+
+a[style*="color: var(--secondary-color)"]:hover {
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+/* Bouton disabled inline */
+button[disabled][style*="background: #999"] {
+    background: rgba(255, 255, 255, 0.06) !important;
+    color: var(--text-muted) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Message couleur dynamique (profil) */
+p[style*="font-weight: bold"] {
+    font-family: var(--font-body);
+}
+
+/* Override des fond de cartes dans la grille */
+div[style*="background: white"] {
+    background: var(--bg-card) !important;
+    border-color: rgba(176, 38, 255, 0.15) !important;
+}
+
+/* ======================== ANIMATIONS GLOBALES ======================== */
+@keyframes neonPulse {
+    0%, 100% { 
+        box-shadow: 0 0 5px rgba(255, 45, 149, 0.3), 0 0 10px rgba(255, 45, 149, 0.1); 
+    }
+    50% { 
+        box-shadow: 0 0 15px rgba(255, 45, 149, 0.5), 0 0 30px rgba(255, 45, 149, 0.2); 
+    }
+}
+
+@keyframes textGlow {
+    0%, 100% { text-shadow: 0 0 5px rgba(0, 240, 255, 0.5); }
+    50% { text-shadow: 0 0 15px rgba(0, 240, 255, 0.8), 0 0 30px rgba(0, 240, 255, 0.4); }
+}
+
+/* ======================== SCROLLBAR ======================== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(176, 38, 255, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(176, 38, 255, 0.5);
+}
+
+/* ======================== SÉLECTION DE TEXTE ======================== */
+::selection {
+    background: rgba(255, 45, 149, 0.3);
+    color: #fff;
+}
+
+/* ======================== RESPONSIVE ======================== */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
         height: auto;
-        padding: 10px;
+        padding: 15px;
+        gap: 10px;
     }
 
     nav ul {
-        margin-top: 10px;
         flex-direction: column;
         align-items: center;
         gap: 10px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero {
+        padding: 40px 15px;
+    }
+
+    main {
+        padding: 20px 10px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    .market-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .card-item img {
+        height: 220px;
+    }
+
+    .btn {
+        padding: 10px 22px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    nav a {
+        font-size: 0.85rem;
     }
 }
