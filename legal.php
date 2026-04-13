@@ -7,7 +7,7 @@
     <h2 style="margin-top: 25px;">1. Éditeur du site</h2>
     <p>Le site <strong>SarKard</strong> est un projet scolaire réalisé dans le cadre d'un exercice de développement web.</p>
     <p>Responsable de la publication : Baptiste Clt</p>
-    <p>Adresse : Projet fictif — aucune adresse physique</p>
+    <p>Adresse : Efrei</p>
     <p>Email de contact : contact@sarkard.local</p>
 
     <h2 style="margin-top: 25px;">2. Hébergement</h2>

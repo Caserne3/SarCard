@@ -76,12 +76,23 @@ $cards_for_sale = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php if ($error): ?>
         <p style="color: red; margin-top: 10px; font-weight: bold;"><?php echo $error; ?></p>
     <?php endif; ?>
+
+    <!-- Filtre par rareté (JS) -->
+    <div style="margin-top: 20px;">
+        <label for="rarity-filter" style="font-weight: 500;">Filtrer par rareté :</label>
+        <select id="rarity-filter" style="padding: 8px 15px; margin-left: 10px; background: var(--bg-input); border: 1px solid rgba(176, 38, 255, 0.2); border-radius: 8px; color: var(--text-primary); font-family: var(--font-body); font-size: 0.9rem; cursor: pointer;">
+            <option value="toutes">Toutes</option>
+            <option value="commune">Commune</option>
+            <option value="rare">Rare</option>
+            <option value="legendaire">Légendaire</option>
+        </select>
+    </div>
 </section>
 
 <section class="market-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px;">
     <?php if (count($cards_for_sale) > 0): ?>
         <?php foreach ($cards_for_sale as $item): ?>
-            <div class="card-item" style="background: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; transition: transform 0.2s;">
+            <div class="card-item" data-rarity="<?php echo htmlspecialchars($item['rarity']); ?>" style="background: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; transition: transform 0.2s;">
                 <img src="<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>" style="width: 100%; height: auto; display: block;">
                 <div class="card-info" style="padding: 15px;">
                     <h3 style="font-size: 1.1rem; margin-bottom: 5px;"><?php echo htmlspecialchars($item['name']); ?></h3>
